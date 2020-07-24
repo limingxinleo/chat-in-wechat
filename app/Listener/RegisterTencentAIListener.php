@@ -14,7 +14,7 @@ namespace App\Listener;
 use Hanson\Foundation\Http;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
-use Hyperf\Guzzle\HandlerStackFactory;
+use Hyperf\Guzzle\CoroutineHandler;
 use Hyperf\Server\Event\MainCoroutineServerStart;
 use Psr\Container\ContainerInterface;
 
@@ -43,7 +43,7 @@ class RegisterTencentAIListener implements ListenerInterface
     public function process(object $event)
     {
         Http::setDefaultOptions([
-            'handler' => $this->container->get(HandlerStackFactory::class)->create(),
+            'handler' => CoroutineHandler::class,
         ]);
     }
 }
