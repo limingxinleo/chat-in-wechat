@@ -43,8 +43,10 @@ class IndexController extends Controller
         foreach ($uploadFiles as $k => $v) {
             $files[$k] = $v->toArray();
         }
-        $app = $this->wechat->getApp();
-        $app['request'] = new Request($get, $post, [], $cookie, $files, $server, $xml);
+
+        var_dump($xml);
+
+        $app = $this->wechat->getApp(new Request($get, $post, [], $cookie, $files, $server, $xml));
 
         $response = $app->server->serve();
 
