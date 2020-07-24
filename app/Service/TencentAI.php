@@ -31,6 +31,10 @@ class TencentAI extends Service
             'appSecret' => $this->config->get('tencent.app_key'),
             'debug' => true,
         ];
-        return $this->app = new Ai($config);
+
+        $app = new Ai($config);
+        $app['guzzle_handler'] = $this->handler;
+
+        return $this->app = $app;
     }
 }

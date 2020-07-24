@@ -14,7 +14,6 @@ namespace App\Service;
 use App\Service\Handler\HandlerInterface;
 use EasyWeChat\Factory;
 use EasyWeChat\OfficialAccount\Application;
-use Hyperf\Guzzle\CoroutineHandler;
 use Symfony\Component\HttpFoundation\Request;
 
 class WeChat extends Service
@@ -28,7 +27,7 @@ class WeChat extends Service
         $app = Factory::officialAccount($config);
 
         // 重写 Handler
-        $app['guzzle_handler'] = new CoroutineHandler();
+        $app['guzzle_handler'] = $this->handler;
         $app['request'] = $request;
 
         $app->server->push(function ($message) {

@@ -13,6 +13,7 @@ namespace App\Service;
 
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\Contract\StdoutLoggerInterface;
+use Hyperf\Guzzle\CoroutineHandler;
 use Psr\Container\ContainerInterface;
 
 abstract class Service
@@ -32,10 +33,16 @@ abstract class Service
      */
     protected $config;
 
+    /**
+     * @var CoroutineHandler
+     */
+    protected $handler;
+
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
         $this->logger = $container->get(StdoutLoggerInterface::class);
         $this->config = $container->get(ConfigInterface::class);
+        $this->handler = new CoroutineHandler();
     }
 }
