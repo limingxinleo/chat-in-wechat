@@ -33,7 +33,9 @@ class TencentAI extends Service
         ];
 
         $app = new Ai($config);
-        $app['guzzle_handler'] = $this->handler;
+        $app['guzzle_handler'] = function () {
+            return $this->handler;
+        };
 
         return $this->app = $app;
     }
