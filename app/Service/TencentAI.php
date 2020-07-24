@@ -11,27 +11,14 @@ declare(strict_types=1);
  */
 namespace App\Service;
 
-use Hyperf\Contract\ConfigInterface;
 use Justmd5\TencentAi\Ai;
-use Psr\Container\ContainerInterface;
 
 class TencentAI extends Service
 {
     /**
-     * @var ConfigInterface
-     */
-    protected $config;
-
-    /**
      * @var null|Ai
      */
     protected $app;
-
-    public function __construct(ContainerInterface $container)
-    {
-        parent::__construct($container);
-        $this->config = $container->get(ConfigInterface::class);
-    }
 
     public function getApp(): Ai
     {

@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 namespace App\Service;
 
+use Hyperf\Contract\ConfigInterface;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Psr\Container\ContainerInterface;
 
@@ -26,9 +27,15 @@ abstract class Service
      */
     protected $logger;
 
+    /**
+     * @var ConfigInterface
+     */
+    protected $config;
+
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
         $this->logger = $container->get(StdoutLoggerInterface::class);
+        $this->config = $container->get(ConfigInterface::class);
     }
 }
