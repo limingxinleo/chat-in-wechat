@@ -31,6 +31,7 @@ class WeChat extends Service
         $app['request'] = $request;
 
         $app->server->push(function ($message) {
+            var_dump($message);
             switch ($message['MsgType']) {
                 case 'event':
                     return '收到事件消息';
