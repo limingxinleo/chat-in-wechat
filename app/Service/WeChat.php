@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 namespace App\Service;
 
+use App\Service\Handler\HandlerInterface;
 use EasyWeChat\Factory;
 use EasyWeChat\OfficialAccount\Application;
 use Hyperf\Guzzle\CoroutineHandler;
@@ -31,26 +32,18 @@ class WeChat extends Service
         $app['request'] = $request;
 
         $app->server->push(function ($message) {
-            var_dump($message);
-            switch ($message['MsgType']) {
-                case 'event':
-                    return '收到事件消息';
-                case 'text':
-                    return '收到文字消息';
-                case 'image':
-                    return '收到图片消息';
-                case 'voice':
-                    return '收到语音消息';
-                case 'video':
-                    return '收到视频消息';
-                case 'location':
-                    return '收到坐标消息';
-                case 'link':
-                    return '收到链接消息';
-                case 'file':
-                    return '收到文件消息';
-                default:
-                    return '收到其它消息';
+            $this->logger->info((string) json_encode($message, JSON_UNESCAPED_UNICODE));
+            if (isset($message['FromUserName'], $message['MsgType'])) {
+                $openid = $message['FromUserName'];
+                $msgType = $message['MsgType'];
+                $handlerName = 'handler.' . $msgType;
+                if (di()->has($handlerName)) {
+                    /** @var HandlerInterface $handler */
+                    $handler = di()->get($handlerName);
+                    return $handler->handle($openid, $message);
+                }
+
+                return null;
             }
         });
 

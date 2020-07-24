@@ -44,17 +44,10 @@ class IndexController extends Controller
             $files[$k] = $v->toArray();
         }
 
-        var_dump($xml);
-
         $app = $this->wechat->getApp(new Request($get, $post, [], $cookie, $files, $server, $xml));
 
         $response = $app->server->serve();
 
         return $response->getContent();
-        $rest = $this->ai->getApp()->nlp->request('textchat', [
-            'question' => '你是谁',
-            'session' => uniqid(),
-        ]);
-        return $this->response->success($rest);
     }
 }
