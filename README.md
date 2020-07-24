@@ -1,3 +1,13 @@
+# 基于微信公众号的智能闲聊服务
+
+1. 注册 [Tencent AI 服务](https://ai.qq.com/)，然后申请 `智能闲聊`。
+
+配置 `APP_ID` 和 `APP_KEY`
+
+2. 注册微信公众号平台，启用 `服务器配置`。
+
+配置 `WECHAT_APP_ID` `WECHAT_APP_SECRET` `WECHAT_APP_TOKEN` 和 `WECHAT_AES_KEY`
+
 # 介绍
 
 Hyperf 是基于 `Swoole 4.3+` 实现的高性能、高灵活性的 PHP 持久化框架，内置协程服务器及大量常用的组件，性能较传统基于 `PHP-FPM` 的框架有质的提升，提供超高性能的同时，也保持着极其灵活的可扩展性，标准组件均以最新的 [PSR 标准](https://www.php-fig.org/psr) 实现，基于强大的依赖注入设计可确保框架内的绝大部分组件或类都是可替换的。
