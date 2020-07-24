@@ -1,12 +1,14 @@
 # 基于微信公众号的智能闲聊服务
 
-1. 注册 [Tencent AI 服务](https://ai.qq.com/)，然后申请 `智能闲聊`。
+## 安装
 
-配置 `APP_ID` 和 `APP_KEY`
+1. 注册 [Tencent AI 服务](https://ai.qq.com/)，然后申请 `智能闲聊`。配置 `APP_ID` 和 `APP_KEY`
 
-2. 注册微信公众号平台，启用 `服务器配置`。
+2. 注册微信公众号平台，启用 `服务器配置`。配置 `WECHAT_APP_ID` `WECHAT_APP_SECRET` `WECHAT_APP_TOKEN` 和 `WECHAT_AES_KEY`
 
-配置 `WECHAT_APP_ID` `WECHAT_APP_SECRET` `WECHAT_APP_TOKEN` 和 `WECHAT_AES_KEY`
+## 效果图
+
+![](./WechatIMG6.jpeg)
 
 # 介绍
 
