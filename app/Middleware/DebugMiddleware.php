@@ -11,12 +11,18 @@ declare(strict_types=1);
  */
 namespace App\Middleware;
 
+use Hyperf\Utils\Codec\Json;
 use Psr\Http\Message\ServerRequestInterface;
 
 class DebugMiddleware extends \HyperfX\Utils\Middleware\DebugMiddleware
 {
     protected function getRequestString(ServerRequestInterface $request): string
     {
-        return $request->getBody()->getContents();
+        $json = [
+            'query' => $request->getQueryParams(),
+            'content' => $request->getBody()->getContents(),
+        ];
+
+        return Json::encode($json);
     }
 }
