@@ -14,6 +14,7 @@ namespace App\Controller;
 use App\Service\TencentAI;
 use App\Service\WeChat;
 use Hyperf\Di\Annotation\Inject;
+use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request;
 
 class IndexController extends Controller
@@ -44,7 +45,10 @@ class IndexController extends Controller
             $files[$k] = $v->toArray();
         }
 
-        $app = $this->wechat->getApp(new Request($get, $post, [], $cookie, $files, $server, $xml));
+        $request = new Request($get, $post, [], $cookie, $files, $server, $xml);
+        $request->headers = new HeaderBag($this->request->getHeaders());
+
+        $app = $this->wechat->getApp($request);
 
         $response = $app->server->serve();
 
