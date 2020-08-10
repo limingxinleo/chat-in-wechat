@@ -1,6 +1,6 @@
 name: biz-skeleton
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   build-alpine-latest:
@@ -9,3 +9,13 @@ jobs:
       - uses: actions/checkout@v1
       - name: build
         run: docker build -t biz-skeleton .
+      - name: login
+        run: docker login docker.pkg.github.com -u limingxinleo -p ${{ secrets.GITHUB_TOKEN }}
+      - name: tag
+        run: |
+          docker tag biz-skeleton:latest docker.pkg.github.com/limingxinleo/chat-in-wechat/chat-in-wechat:${GITHUB_REF##*/}
+          docker tag biz-skeleton:latest docker.pkg.github.com/limingxinleo/chat-in-wechat/chat-in-wechat:latest
+      - name: push
+        run: |
+          docker push docker.pkg.github.com/limingxinleo/sign-in/chat-in-wechat:${GITHUB_REF##*/}
+          docker push docker.pkg.github.com/limingxinleo/sign-in/chat-in-wechat:latest
