@@ -17,5 +17,22 @@ jobs:
           docker tag biz-skeleton:latest docker.pkg.github.com/limingxinleo/chat-in-wechat/chat-in-wechat:latest
       - name: push
         run: |
-          docker push docker.pkg.github.com/limingxinleo/sign-in/chat-in-wechat:${GITHUB_REF##*/}
-          docker push docker.pkg.github.com/limingxinleo/sign-in/chat-in-wechat:latest
+          docker push docker.pkg.github.com/limingxinleo/chat-in-wechat/chat-in-wechat:${GITHUB_REF##*/}
+          docker push docker.pkg.github.com/limingxinleo/chat-in-wechat/chat-in-wechat:latest
+
+  build-aliyun-latest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: build
+        run: docker build -t biz-skeleton .
+      - name: login
+        run: docker login registry.cn-shanghai.aliyuncs.com -u 715557344@qq.com -p ${{ secrets.ALIYUN_ACCESS_TOKEN }}
+      - name: tag
+        run: |
+          docker tag biz-skeleton:latest registry.cn-shanghai.aliyuncs.com/limingxinleo/chat_in_wechat:${GITHUB_REF##*/}
+          docker tag biz-skeleton:latest registry.cn-shanghai.aliyuncs.com/limingxinleo/chat_in_wechat:latest
+      - name: push
+        run: |
+          docker push registry.cn-shanghai.aliyuncs.com/limingxinleo/chat_in_wechat:${GITHUB_REF##*/}
+          docker push registry.cn-shanghai.aliyuncs.com/limingxinleo/chat_in_wechat:latest
