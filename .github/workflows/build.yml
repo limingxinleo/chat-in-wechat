@@ -6,7 +6,7 @@ jobs:
   build-alpine-latest:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: build
         run: docker build -t biz-skeleton .
       - name: login
@@ -23,7 +23,7 @@ jobs:
   build-aliyun-latest:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: build
         run: docker build -t biz-skeleton .
       - name: login
