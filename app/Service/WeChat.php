@@ -34,7 +34,7 @@ class WeChat extends Service
         $app = Factory::officialAccount($config);
 
         // 重写 Request
-        $app['request'] = $request;
+        $app->rebind('request', $request);
 
         // 重写 Guzzle Client
         $config = $app['config']->get('http', []);
